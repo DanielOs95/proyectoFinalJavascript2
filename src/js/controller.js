@@ -1,3 +1,7 @@
+import * as model from './model.js';
+import RecipeView from './views/RecipeView.js';
+import RecipeViews from './views/RecipeView.js';
+//import { state } from './model.js';
 import icons from 'url:../img/icons.svg';
 
 const recipeContainer = document.querySelector('.recipe');
@@ -27,21 +31,27 @@ const renderSpinner = function(parentE1) {
 };
 
 
-async function showRecipe () {
+const controlRecipes = async function () {
   try {
-    renderSpinner(recipeContainer);
+    //renderSpinner(recipeContainer);
 
     const id = window.location.hash.slice(1);
-    console.log(id)
+    //console.log(id)
 
-    if (id) return;
+    if (!id) return;
+    RecipeView.renderSpinner();
 
-    const resp = await fetch(' https://forkify-api.herokuapp.com/api/v2/recipes/5ed6604591c37cdc054bc886');
+    await model.loadRecipe(id);
+
+    RecipeView.render(model.state.recipe);
+
+   /* const resp = await fetch(' https://forkify-api.herokuapp.com/api/v2/recipes/5ed6604591c37cdc054bc886');
 
     const data = await resp.json();
 
     console.log('resp:', resp);
     console.log('data:', data);
+
 
     let recipe = data.data.recipe;
 
@@ -121,12 +131,12 @@ async function showRecipe () {
     
     recipeContainer.innerHTML = '';
 
-    recipeContainer.insertAdjacentHTML('afterbegin', markup);
+    recipeContainer.insertAdjacentHTML('afterbegin', markup);*/
 
    
     
-  } catch (error) {
-    alert(`Error: ${error}`);
+  } catch (err) {
+    console.error(err);
   }
 }
 
