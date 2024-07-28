@@ -24,9 +24,13 @@ class ResultsView extends View {
         `;
     }
 
+    _generateMarkup() {
+      return this._data.map(this._generateMarkupPreview).join('');
+    }
+
     render(data) {
         this._data = data;
-        const markup = this._data.map(this._generateMarkupPreview.bind(this)).join('');
+        const markup = this._generateMarkup();
         this._clear();
         this._parentElement.insertAdjacentHTML('afterbegin', markup);
     }
