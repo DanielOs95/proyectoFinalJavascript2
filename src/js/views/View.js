@@ -5,6 +5,16 @@ export default class View {
         this._parentElement.innerHTML = '';
     }
 
+    render(data) {
+      if (!data || (Array.isArray(data) && data.length === 0)) {
+        return this.renderError();
+      }
+      this.data = data;
+      const markup = this._generateMarkup();
+      this._clear();
+      this._parentElement.insertAdjacentHTML('afterbegin', markup);
+    }
+
     renderSpinner() {
         const markup = `
       <div class="spinner">
@@ -30,7 +40,7 @@ export default class View {
     this._parentElement.insertAdjacentHTML('afterbegin', markup);
     }
 
-    renderMessage(message = this.message) {
+    renderMessage(message = this._message) {
         const markup = `
       <div class="message">
         <svg>

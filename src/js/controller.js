@@ -2,7 +2,7 @@ import * as model from './model.js';
 import RecipeView from './views/RecipeView.js';
 import SearchView from './views/searchViews.js';
 import ResultsView from './views/ResultView.js'; 
-import PaginationView from './views/PaginationView.js';
+import PaginationView from './views/paginationView.js';
 import { getSearchResultsPage } from './model.js';
 import icons from 'url:../img/icons.svg'; 
 
