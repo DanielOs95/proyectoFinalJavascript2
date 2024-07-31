@@ -28,6 +28,14 @@ const controlSearchResults = async function () {
 
     await model.loadSearchResults(query);
 
+
+    const results = model.getSearchResultsPage();
+    if (results.length === 0) {
+      ResultsView.renderError();
+      return;
+    }
+
+
     ResultsView.render(model.getSearchResultsPage());
     PaginationView.render(model.state.search);
   } catch (err) {
